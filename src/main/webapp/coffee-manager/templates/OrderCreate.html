@@ -1,0 +1,34 @@
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Coffee Name</th>
+            <th style="text-align: center">Price (per Capsule)</th>
+            <th style="text-align: center">Num. of Capsules (per Box)</th>
+            <th style="text-align: center">Num. of Boxes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#items}}
+        <tr>
+            <td style="text-align: center; vertical-align: middle"><img src="{{imageUrl}}"/></td>
+            <td style="vertical-align: middle">{{name}}</td>
+            <td style="text-align: center; vertical-align: middle">€ {{unitPrice}}</td>
+            <td style="text-align: center; vertical-align: middle">{{numUnits}}</td>
+            <td style="text-align: center; vertical-align: middle">
+            <div class="input-append">
+                <input id="{{id}}" type="text" class="input-mini" name="quantity[]" style="text-align: right" placeholder="0" />
+                <span class="add-on">Boxes</span>
+            </div></td>
+        </tr>
+        {{/items}}
+    </tbody>
+</table>
+<div class="pull-right">
+    <button type="reset" class="btn btn-danger">
+        Reset Order
+    </button>
+    <button class="btn btn-success" id="create-order">
+        Create Order
+    </button>
+</div>

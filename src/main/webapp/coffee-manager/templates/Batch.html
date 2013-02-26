@@ -1,0 +1,24 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th style="text-align: center">Total</th>
+			<th style="text-align: center">Num. of Capsules</th>
+			<th style="text-align: center">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#orders}}
+		<tr>
+			<td><img src="{{imageUrl}}"/></td>
+			<td>{{owner.name}}</td>
+			<td style="text-align: center">€ {{total}}</td>
+			<td style="text-align: center">{{count}}</td>
+			<td style="text-align: center">
+				cenas			
+			</td>
+		</tr>
+		{{/orders}}
+	</tbody>
+</table>

@@ -1,0 +1,14 @@
+app.name=coffee-manager
+db.alias=//localhost:3306/coffee?useUnicode=true&amp;characterEncoding=UTF-8&amp;clobCharacterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull
+db.user=root
+db.pass=
+language=pt
+location=PT
+variant=
+localhost.cas.enable=true
+localhost.cas.loginUrl=
+localhost.cas.ValidateUrl=
+localhost.cas.logoutUrl=
+fenixdata.user=
+fenixdata.pass=
+fenixdata.url=

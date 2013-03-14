@@ -1,0 +1,84 @@
+package pt.ist.bennu.coffee.manager.domain;
+
+valueType java.math.BigDecimal as BigDecimal {
+    externalizeWith {
+        String toString();
+    }
+}
+
+class Person {
+	String name;
+	String email;
+}
+
+class CoffeeManager;
+
+class CoffeeItem {
+    String name ( REQUIRED );
+    String imageUrl;
+    int numUnits ( REQUIRED );
+    BigDecimal unitPrice ( REQUIRED );
+    Boolean available;
+}
+
+class CoffeeOrder;
+
+class CoffeeOrderEntry {
+    int quantity ( REQUIRED );
+}
+
+class CoffeeBatch {
+    DateTime creationTimestamp;
+	DateTime sentTimestamp;
+	DateTime receivedTimestamp;
+	BigDecimal shippingCharges;
+}
+
+relation UserHavePersons {
+	.pt.ist.bennu.core.domain.User playsRole user { multiplicity 1..1; }
+	Person playsRole person { multiplicity 0..1; }
+}
+
+relation BennuCoffeeManager {
+	.pt.ist.bennu.core.domain.Bennu playsRole bennu {
+		multiplicity 1..1;
+	}
+	CoffeeManager playsRole coffeeManager {
+		multiplicity 0..1;
+	}
+}
+
+relation CoffeeManagerHasCoffeeItems {
+    CoffeeManager playsRole coffeeManager { multiplicity 0..1; }
+    CoffeeItem playsRole coffeeItem { multiplicity 0..*; }
+}
+
+relation CoffeeItemHasPreviousVersions {
+	CoffeeItem playsRole previousVersion { multiplicity 0..1; }
+	CoffeeItem playsRole nextVersion { multiplicity 0..1; }
+}
+
+relation CoffeeManagerHasBatches {
+    CoffeeManager playsRole coffeeManager { multiplicity 1..1; }
+    CoffeeBatch playsRole batch { multiplicity 0..*; }
+}
+
+relation CoffeeBatchesHaveCoffeeOrders {
+    CoffeeBatch playsRole coffeeBatch { multiplicity 0..1; }
+    CoffeeOrder playsRole coffeeOrder { multiplicity 0..*; }
+}
+
+relation UserMakesCoffeeOrders {
+    .pt.ist.bennu.core.domain.User playsRole user { multiplicity 1..1; }
+    CoffeeOrder playsRole coffeeOrder { multiplicity 0..*; }
+}
+
+relation CoffeeOrderHasCoffeeOrderEntries {
+    CoffeeOrder playsRole coffeeOrder { multiplicity 1..1; }
+    CoffeeOrderEntry playsRole entry { multiplicity 0..*; }
+}
+
+relation CoffeeOrderEntryHasCoffeeItem {
+    CoffeeItem playsRole item { multiplicity 1..1; }
+    CoffeeOrderEntry playsRole orderEntry { multiplicity 0..*; }
+}

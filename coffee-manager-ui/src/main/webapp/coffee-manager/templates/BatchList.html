@@ -1,0 +1,51 @@
+<ul class="nav nav-pills">
+  <li class="batch-filter-pill">
+    <a id="show-all-batches" href="#batches">{{All}}</a>
+  </li>
+  <li class="batch-filter-pill"><a id="show-only-batches-not-sent" href="#batches/sent">{{Not Sent}}</a></li>
+  <li class="batch-filter-pill"><a id="show-only-sent-batches" href="#batches/not-sent">{{Sent}}</a></li>
+  <li class="batch-filter-pill"><a id="show-only-received-batches" href="#batches/received">{{Received}}</a></li>
+</ul>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="text-align: center">{{Creation Timestamp}}</th>
+            <th style="text-align: center">{{Sent Timestamp}}</th>
+            <th style="text-align: center">{{Received Timestamp}}</th>
+            <th style="text-align: center">{{Total Capsules}}</th>
+            <th style="text-align: center">{{Status}}</th>
+            <th style="width:21%">{{Actions}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#batches}}
+		<tr>
+			<td class="time" style="text-align: center">{{creationTimestamp}}</td>
+			<td {{#sentTimestamp}}class="time"{{/sentTimestamp}} style="text-align: center">{{#sentTimestamp}}{{sentTimestamp}}{{/sentTimestamp}}{{^sentTimestamp}}NA{{/sentTimestamp}}</td>
+			<td {{#receivedTimestamp}}class="time"{{/receivedTimestamp}} style="text-align: center">{{#receivedTimestamp}}{{receivedTimestamp}}{{/receivedTimestamp}}{{^receivedTimestamp}}NA{{/receivedTimestamp}}</td>
+			<td style="text-align: center">{{numCapsules}}</td>
+			<td style="text-align: center">
+				{{^sentTimestamp}}<span class="label label-important">Not Sent</span>{{/sentTimestamp}}
+				{{#sentTimestamp}}
+					{{^receivedTimestamp}}<span class="label label-warning">Sent</span>{{/receivedTimestamp}}
+					{{#receivedTimestamp}}<span class="label label-inverse">Received</span>{{/receivedTimestamp}}
+				{{/sentTimestamp}}
+			</td>
+			<td>
+				<button id='{{id}}' class='btn btn-info btn-mini show-batch'>View Batch</button>
+				{{^sentTimestamp}}
+				<button class="btn btn-mini btn-success input-small">Dispatch</button>
+				{{/sentTimestamp}}
+				{{#sentTimestamp}}
+					{{^receivedTimestamp}}
+					<button class="btn btn-mini btn-inverse input-small">Receive</button>
+					{{/receivedTimestamp}}
+				{{/sentTimestamp}}				
+			</td>
+		</tr>
+	{{/batches}}
+	{{^batches}}
+		<tr><td colspan="6" style="font-size: 26px; color: #CCC; margin: 5px 5px; text-align: center">{{No Batches Found}}</td></tr>
+	{{/batches}}
+    </tbody>
+</table>
